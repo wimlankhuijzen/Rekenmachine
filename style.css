@@ -1,0 +1,287 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 40px 16px;
+  background: #1a1a2e;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 320px;
+}
+
+.calculator {
+  background: #16213e;
+  border-radius: 20px;
+  padding: 24px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+/* ── Wind Widget ── */
+.wind-widget {
+  background: #16213e;
+  border-radius: 20px;
+  padding: 20px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  color: #fff;
+}
+
+.wind-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.wind-location {
+  font-size: 13px;
+  color: #a0aec0;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+}
+
+.wind-refresh {
+  background: none;
+  border: none;
+  color: #a0aec0;
+  font-size: 18px;
+  cursor: pointer;
+  padding: 2px 6px;
+  border-radius: 6px;
+  transition: color 0.2s;
+}
+
+.wind-refresh:hover { color: #fff; }
+
+.wind-body {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 18px;
+}
+
+/* Compass */
+.compass-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.compass-ring {
+  position: relative;
+  width: 76px;
+  height: 76px;
+  border: 2px solid #2d4080;
+  border-radius: 50%;
+  background: #0f3460;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.compass-label {
+  position: absolute;
+  font-size: 10px;
+  font-weight: 700;
+  color: #a0aec0;
+}
+
+.cn { top: 4px;  left: 50%; transform: translateX(-50%); }
+.cs { bottom: 4px; left: 50%; transform: translateX(-50%); }
+.cw { left: 4px; top: 50%; transform: translateY(-50%); }
+.ce { right: 4px; top: 50%; transform: translateY(-50%); }
+
+.compass-arrow {
+  font-size: 28px;
+  color: #e94560;
+  transition: transform 0.8s ease;
+  line-height: 1;
+}
+
+.compass-deg {
+  font-size: 12px;
+  color: #a0aec0;
+}
+
+/* Wind stats */
+.wind-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
+}
+
+.wind-stat-label {
+  font-size: 11px;
+  color: #a0aec0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.wind-stat-value {
+  font-size: 20px;
+  font-weight: 600;
+  color: #fff;
+  line-height: 1.2;
+}
+
+.wind-stat-value small {
+  font-size: 12px;
+  font-weight: 400;
+  color: #a0aec0;
+}
+
+.wind-stat-sub {
+  font-size: 12px;
+  color: #a0aec0;
+}
+
+/* Kite section */
+.kite-section {
+  border-top: 1px solid #2d4080;
+  padding-top: 14px;
+}
+
+.kite-title {
+  font-size: 12px;
+  color: #a0aec0;
+  margin-bottom: 8px;
+}
+
+.kite-bar-wrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 6px;
+}
+
+.kite-bar-bg {
+  flex: 1;
+  height: 10px;
+  background: #0f3460;
+  border-radius: 99px;
+  overflow: hidden;
+}
+
+.kite-bar-fill {
+  height: 100%;
+  width: 0%;
+  border-radius: 99px;
+  background: linear-gradient(90deg, #e94560, #f5a623);
+  transition: width 0.8s ease, background 0.8s;
+}
+
+.kite-percent {
+  font-size: 16px;
+  font-weight: 700;
+  color: #fff;
+  min-width: 42px;
+  text-align: right;
+}
+
+.kite-verdict {
+  font-size: 13px;
+  color: #a0aec0;
+  min-height: 18px;
+}
+
+.wind-updated {
+  font-size: 11px;
+  color: #4a5568;
+  margin-top: 10px;
+  text-align: right;
+}
+
+/* Display */
+.display {
+  background: #0f3460;
+  border-radius: 12px;
+  padding: 16px 20px;
+  margin-bottom: 20px;
+  text-align: right;
+  min-height: 90px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  overflow: hidden;
+}
+
+.expression {
+  color: #a0aec0;
+  font-size: 14px;
+  min-height: 20px;
+  word-break: break-all;
+}
+
+.result {
+  color: #ffffff;
+  font-size: 40px;
+  font-weight: 300;
+  margin-top: 4px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Buttons grid */
+.buttons {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+
+.btn {
+  background: #1a2a50;
+  color: #ffffff;
+  border: none;
+  border-radius: 12px;
+  font-size: 20px;
+  padding: 18px 0;
+  cursor: pointer;
+  transition: background 0.15s, transform 0.1s;
+  user-select: none;
+}
+
+.btn:hover {
+  background: #243560;
+}
+
+.btn:active {
+  transform: scale(0.95);
+  background: #2d4080;
+}
+
+.btn.wide {
+  grid-column: span 2;
+}
+
+.btn.operator {
+  background: #e94560;
+  color: #fff;
+}
+
+.btn.operator:hover {
+  background: #ff5f7e;
+}
+
+.btn.equals {
+  background: #e94560;
+  color: #fff;
+}
+
+.btn.equals:hover {
+  background: #ff5f7e;
+}
