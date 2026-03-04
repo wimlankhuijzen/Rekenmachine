@@ -9,8 +9,9 @@ const SPOTS = [
     lat: 52.374,
     lon: 5.534,
     home: true,
-    // Best wind directions (degrees): N, NNO, NO, NNW
-    goodDirs: [[315, 360], [0, 70], [295, 325]],
+    // Best wind directions: N, NNO, NO, NNW + Z, ZZW, ZW (secret spot bij zuidwind)
+    // Slecht: O (te oost), WSW (~247°)
+    goodDirs: [[295, 360], [0, 70], [160, 245]],
   },
   {
     name: 'Elburg',
