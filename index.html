@@ -1,102 +1,202 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="nl">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Calculator</title>
-  <link rel="stylesheet" href="style.css" />
+  <title>Horst Kiters Dashboard</title>
+  <link rel="stylesheet" href="kite.css" />
 </head>
 <body>
-  <div class="page">
-  <div class="calculator">
-    <div class="display">
-      <div class="expression" id="expression"></div>
-      <div class="result" id="result">0</div>
-    </div>
-    <div class="buttons">
-      <button class="btn wide" onclick="clearAll()">AC</button>
-      <button class="btn" onclick="toggleSign()">+/-</button>
-      <button class="btn" onclick="percent()">%</button>
-      <button class="btn operator" onclick="inputOperator('/')">÷</button>
 
-      <button class="btn" onclick="inputDigit('7')">7</button>
-      <button class="btn" onclick="inputDigit('8')">8</button>
-      <button class="btn" onclick="inputDigit('9')">9</button>
-      <button class="btn operator" onclick="inputOperator('*')">×</button>
+  <!-- Warning banner -->
+  <div id="warning-banner" class="warning-banner hidden"></div>
 
-      <button class="btn" onclick="inputDigit('4')">4</button>
-      <button class="btn" onclick="inputDigit('5')">5</button>
-      <button class="btn" onclick="inputDigit('6')">6</button>
-      <button class="btn operator" onclick="inputOperator('-')">−</button>
-
-      <button class="btn" onclick="inputDigit('1')">1</button>
-      <button class="btn" onclick="inputDigit('2')">2</button>
-      <button class="btn" onclick="inputDigit('3')">3</button>
-      <button class="btn operator" onclick="inputOperator('+')">+</button>
-
-      <button class="btn wide" onclick="inputDigit('0')">0</button>
-      <button class="btn" onclick="inputDot()">.</button>
-      <button class="btn equals" onclick="calculate()">=</button>
-    </div>
-  </div>
-
-  <!-- Wind widget -->
-  <div class="wind-widget">
-    <div class="wind-header">
-      <span class="wind-location">&#128205; Strand Horst &mdash; Harderwijk</span>
-      <button class="wind-refresh" onclick="fetchWind()" title="Refresh">&#8635;</button>
-    </div>
-
-    <div class="wind-body">
-      <!-- Compass -->
-      <div class="compass-wrap">
-        <div class="compass-ring">
-          <span class="compass-label cn">N</span>
-          <span class="compass-label ce">E</span>
-          <span class="compass-label cs">S</span>
-          <span class="compass-label cw">W</span>
-          <div class="compass-arrow" id="compass-arrow">&#11014;</div>
-        </div>
-        <div class="compass-deg" id="compass-deg">--&deg;</div>
-      </div>
-
-      <!-- Stats -->
-      <div class="wind-stats">
-        <div class="wind-stat">
-          <div class="wind-stat-label">Wind</div>
-          <div class="wind-stat-value"><span id="wind-speed">--</span> <small>m/s</small></div>
-          <div class="wind-stat-sub"><span id="wind-knots">--</span> kt</div>
-        </div>
-        <div class="wind-stat">
-          <div class="wind-stat-label">Gusts</div>
-          <div class="wind-stat-value"><span id="wind-gusts">--</span> <small>m/s</small></div>
-        </div>
-        <div class="wind-stat">
-          <div class="wind-stat-label">Direction</div>
-          <div class="wind-stat-value" id="wind-dir-label">--</div>
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="header-title">
+        <span class="kite-icon">🪁</span>
+        <div>
+          <h1>Horst Kiters</h1>
+          <p class="header-sub">Kitesurf Dashboard — Strand Horst, Harderwijk</p>
         </div>
       </div>
-    </div>
-
-    <!-- Kitesurf likelihood -->
-    <div class="kite-section">
-      <div class="kite-title">&#127985; Kitesurf likelihood &mdash; next 2 hours</div>
-      <div class="kite-bar-wrap">
-        <div class="kite-bar-bg">
-          <div class="kite-bar-fill" id="kite-fill"></div>
-        </div>
-        <div class="kite-percent" id="kite-percent">--%</div>
+      <div class="header-meta">
+        <div id="last-updated" class="last-updated">Laden…</div>
+        <button class="refresh-btn" onclick="refreshAll()" title="Vernieuwen">↻ Vernieuwen</button>
+        <a href="calculator.html" class="back-link">← Rekenmachine</a>
       </div>
-      <div class="kite-verdict" id="kite-verdict">Loading wind data&hellip;</div>
     </div>
+  </header>
 
-    <div class="wind-updated" id="wind-updated"></div>
-  </div>
+  <main class="main">
 
-  </div> <!-- end .page -->
-  <script src="script.js"></script>
-  <div style="text-align:center;margin-top:16px">
-    <a href="kite.html" style="color:#00b4d8;font-size:0.85rem;text-decoration:none">🪁 Kitesurf Dashboard →</a>
-  </div>
+    <!-- SECTION 1: Actuele condities Strand Horst -->
+    <section class="section">
+      <h2 class="section-title">🌬️ Nu op Strand Horst</h2>
+      <div class="current-grid">
+        <div class="current-card main-wind">
+          <div class="compass-wrap">
+            <div class="compass-ring">
+              <span class="c-label cn">N</span>
+              <span class="c-label ce">O</span>
+              <span class="c-label cs">Z</span>
+              <span class="c-label cw">W</span>
+              <div class="compass-arrow" id="compass-arrow">↑</div>
+            </div>
+          </div>
+          <div class="wind-nums">
+            <div class="wind-big"><span id="cur-speed">--</span><small>kn</small></div>
+            <div class="wind-gust">Gusts: <span id="cur-gust">--</span> kn</div>
+            <div class="wind-dir-label" id="cur-dir-label">--</div>
+            <div class="wind-deg" id="cur-deg">--°</div>
+          </div>
+        </div>
+
+        <div class="current-card kite-score-card">
+          <div class="score-label">Kite-o-meter</div>
+          <div class="score-circle" id="score-circle">
+            <div class="score-value" id="score-value">--</div>
+            <div class="score-text" id="score-text">--</div>
+          </div>
+          <div class="score-legend">
+            <span class="leg good">● Goed: 12–25 kn</span>
+            <span class="leg marginal">● Marginaal: 8–12 / 25–35 kn</span>
+            <span class="leg bad">● Slecht: &lt;8 / &gt;35 kn</span>
+          </div>
+        </div>
+
+        <div class="current-card weather-card">
+          <div class="weather-stat">
+            <span class="ws-label">Watertemp.</span>
+            <span class="ws-val" id="water-temp">--°C</span>
+            <span class="ws-note">IJsselmeer (schating)</span>
+          </div>
+          <div class="weather-stat">
+            <span class="ws-label">Luchtdruk</span>
+            <span class="ws-val" id="air-pressure">-- hPa</span>
+          </div>
+          <div class="weather-stat">
+            <span class="ws-label">Bewolking</span>
+            <span class="ws-val" id="cloud-cover">--%</span>
+          </div>
+          <div class="weather-stat">
+            <span class="ws-label">Neerslag kans</span>
+            <span class="ws-val" id="precip">--%</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 2: 3-daagse voorspelling -->
+    <section class="section">
+      <h2 class="section-title">📅 Voorspelling — komende 4 dagen</h2>
+      <div class="day-tabs">
+        <button class="day-tab active" onclick="showDay(0, this)">Vandaag</button>
+        <button class="day-tab" onclick="showDay(1, this)" id="tab-1">morgen</button>
+        <button class="day-tab" onclick="showDay(2, this)" id="tab-2">overmorgen</button>
+        <button class="day-tab" onclick="showDay(3, this)" id="tab-3">+3</button>
+      </div>
+      <div class="forecast-chart" id="forecast-chart">
+        <div class="loading-msg">Winddata ophalen…</div>
+      </div>
+      <div class="day-summary" id="day-summary"></div>
+    </section>
+
+    <!-- SECTION 3: Spots vergelijking -->
+    <section class="section">
+      <h2 class="section-title">📍 Spots vergelijking</h2>
+      <div class="spots-grid" id="spots-grid">
+        <div class="spot-card loading-card">Spotdata laden…</div>
+      </div>
+    </section>
+
+    <!-- SECTION 4: Beste kitewindrichting info -->
+    <section class="section info-section">
+      <h2 class="section-title">🧭 Windrichting per spot</h2>
+      <div class="dir-table">
+        <div class="dir-row header">
+          <div>Spot</div><div>Beste richting</div><div>Water</div><div>Tip</div>
+        </div>
+        <div class="dir-row">
+          <div><strong>Strand Horst</strong></div>
+          <div>N • NNO • NO • NNW</div>
+          <div>IJsselmeer (zoet, plat–chop)</div>
+          <div>Opstap bij parkeerplaats, let op stroming bij wind &gt;25 kn</div>
+        </div>
+        <div class="dir-row">
+          <div><strong>Elburg</strong></div>
+          <div>N • NW • W</div>
+          <div>IJsselmeer (plat)</div>
+          <div>Rustig instapgebied, goed voor beginners</div>
+        </div>
+        <div class="dir-row">
+          <div><strong>Muiderberg</strong></div>
+          <div>W • ZW • NW</div>
+          <div>IJmeer (klein, snel chop)</div>
+          <div>WSC Muiderberg heeft faciliteiten; let op boten</div>
+        </div>
+        <div class="dir-row">
+          <div><strong>IJmuiden</strong></div>
+          <div>W • ZW • NW</div>
+          <div>Noordzee (swell + chop)</div>
+          <div>Zeeschouwing; sterke gusts mogelijk; gevorderd niveau</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 5: Handige links -->
+    <section class="section">
+      <h2 class="section-title">🔗 Handige links</h2>
+      <div class="links-grid">
+        <a class="link-card" href="https://surfweer.nl" target="_blank">
+          <div class="lc-icon">🌊</div>
+          <div class="lc-name">surfweer.nl</div>
+          <div class="lc-desc">Tobias' professionele windverwachting — favoriet van de groep</div>
+        </a>
+        <a class="link-card" href="https://www.windfinder.com/forecast/harderwijk_strand_horst" target="_blank">
+          <div class="lc-icon">💨</div>
+          <div class="lc-name">Windfinder — Horst</div>
+          <div class="lc-desc">Spot-specifieke windkaart en uurprognose</div>
+        </a>
+        <a class="link-card" href="https://weather2kite.nl" target="_blank">
+          <div class="lc-icon">🪁</div>
+          <div class="lc-name">weather2kite.nl</div>
+          <div class="lc-desc">Kite-specifieke condities per spot</div>
+        </a>
+        <a class="link-card" href="https://www.wolderwijdweer.nl" target="_blank">
+          <div class="lc-icon">📊</div>
+          <div class="lc-name">wolderwijdweer.nl</div>
+          <div class="lc-desc">Lokale weergrafieken Harderwijk-omgeving</div>
+        </a>
+        <a class="link-card" href="https://www.waterkaart.net" target="_blank">
+          <div class="lc-icon">🗺️</div>
+          <div class="lc-name">waterkaart.net</div>
+          <div class="lc-desc">Waterkaart met stromingen en vaarwegen</div>
+        </a>
+        <a class="link-card" href="https://www.knmi.nl/nederland-nu/weer/waarschuwingen" target="_blank">
+          <div class="lc-icon">⚠️</div>
+          <div class="lc-name">KNMI Waarschuwingen</div>
+          <div class="lc-desc">Code geel/oranje/rood — altijd checken bij extreme wind</div>
+        </a>
+      </div>
+    </section>
+
+    <!-- SECTION 6: Fotogalerij -->
+    <section class="section">
+      <h2 class="section-title">📷 Sessie-foto's</h2>
+      <div class="gallery" id="gallery"></div>
+      <div id="lightbox" class="lightbox hidden" onclick="closeLightbox()">
+        <img id="lightbox-img" src="" alt="" />
+        <div class="lightbox-close">✕</div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <p>Data: <a href="https://open-meteo.com" target="_blank">Open-Meteo</a> · Horst Kiters WhatsApp-groep 2021–2026 · <a href="calculator.html">← Terug naar rekenmachine</a></p>
+  </footer>
+
+  <script src="kite.js"></script>
 </body>
 </html>

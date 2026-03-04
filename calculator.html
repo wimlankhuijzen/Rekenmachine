@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Calculator</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="page">
+  <div class="calculator">
+    <div class="display">
+      <div class="expression" id="expression"></div>
+      <div class="result" id="result">0</div>
+    </div>
+    <div class="buttons">
+      <button class="btn wide" onclick="clearAll()">AC</button>
+      <button class="btn" onclick="toggleSign()">+/-</button>
+      <button class="btn" onclick="percent()">%</button>
+      <button class="btn operator" onclick="inputOperator('/')">÷</button>
+
+      <button class="btn" onclick="inputDigit('7')">7</button>
+      <button class="btn" onclick="inputDigit('8')">8</button>
+      <button class="btn" onclick="inputDigit('9')">9</button>
+      <button class="btn operator" onclick="inputOperator('*')">×</button>
+
+      <button class="btn" onclick="inputDigit('4')">4</button>
+      <button class="btn" onclick="inputDigit('5')">5</button>
+      <button class="btn" onclick="inputDigit('6')">6</button>
+      <button class="btn operator" onclick="inputOperator('-')">−</button>
+
+      <button class="btn" onclick="inputDigit('1')">1</button>
+      <button class="btn" onclick="inputDigit('2')">2</button>
+      <button class="btn" onclick="inputDigit('3')">3</button>
+      <button class="btn operator" onclick="inputOperator('+')">+</button>
+
+      <button class="btn wide" onclick="inputDigit('0')">0</button>
+      <button class="btn" onclick="inputDot()">.</button>
+      <button class="btn equals" onclick="calculate()">=</button>
+    </div>
+  </div>
+
+  <!-- Wind widget -->
+  <div class="wind-widget">
+    <div class="wind-header">
+      <span class="wind-location">&#128205; Strand Horst &mdash; Harderwijk</span>
+      <button class="wind-refresh" onclick="fetchWind()" title="Refresh">&#8635;</button>
+    </div>
+
+    <div class="wind-body">
+      <!-- Compass -->
+      <div class="compass-wrap">
+        <div class="compass-ring">
+          <span class="compass-label cn">N</span>
+          <span class="compass-label ce">E</span>
+          <span class="compass-label cs">S</span>
+          <span class="compass-label cw">W</span>
+          <div class="compass-arrow" id="compass-arrow">&#11014;</div>
+        </div>
+        <div class="compass-deg" id="compass-deg">--&deg;</div>
+      </div>
+
+      <!-- Stats -->
+      <div class="wind-stats">
+        <div class="wind-stat">
+          <div class="wind-stat-label">Wind</div>
+          <div class="wind-stat-value"><span id="wind-speed">--</span> <small>m/s</small></div>
+          <div class="wind-stat-sub"><span id="wind-knots">--</span> kt</div>
+        </div>
+        <div class="wind-stat">
+          <div class="wind-stat-label">Gusts</div>
+          <div class="wind-stat-value"><span id="wind-gusts">--</span> <small>m/s</small></div>
+        </div>
+        <div class="wind-stat">
+          <div class="wind-stat-label">Direction</div>
+          <div class="wind-stat-value" id="wind-dir-label">--</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Kitesurf likelihood -->
+    <div class="kite-section">
+      <div class="kite-title">&#127985; Kitesurf likelihood &mdash; next 2 hours</div>
+      <div class="kite-bar-wrap">
+        <div class="kite-bar-bg">
+          <div class="kite-bar-fill" id="kite-fill"></div>
+        </div>
+        <div class="kite-percent" id="kite-percent">--%</div>
+      </div>
+      <div class="kite-verdict" id="kite-verdict">Loading wind data&hellip;</div>
+    </div>
+
+    <div class="wind-updated" id="wind-updated"></div>
+  </div>
+
+  </div> <!-- end .page -->
+  <script src="script.js"></script>
+  <div style="text-align:center;margin-top:16px">
+    <a href="index.html" style="color:#00b4d8;font-size:0.85rem;text-decoration:none">🪁 Kitesurf Dashboard →</a>
+  </div>
+</body>
+</html>
